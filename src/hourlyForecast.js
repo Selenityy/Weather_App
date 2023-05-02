@@ -19,11 +19,11 @@ const individualHourNodes = () => {
   }
 };
 
-const createHourlyForecast = () => {
+const createHourlyForecastFooter = () => {
   console.log("bunny");
   createNewDiv("hourlyGraph", "content");
 
   individualHourNodes();
 };
 
-export { createHourlyForecast };
+export { createHourlyForecastFooter };
