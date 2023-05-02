@@ -1,10 +1,10 @@
 import "./style.css";
-import { createSearchBar } from "./searchBar";
+import { createSearchHeader } from "./searchBar";
 import { createMainContent } from "./mainContent";
-import { createHourlyForecast } from "./hourlyForecast";
+import { createHourlyForecastFooter } from "./hourlyForecast";
 
-createSearchBar();
+createSearchHeader();
 
 createMainContent();
 
-createHourlyForecast();
+createHourlyForecastFooter();
