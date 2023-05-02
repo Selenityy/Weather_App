@@ -1,3 +1,46 @@
-#content {
-  background-color: pink;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+  padding: 20px;
+}
+
+#myForm {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid black;
+  max-width: 200px;
+  height: 30px;
+}
+
+input#location {
+  border: none;
+  width: 180px;
+  height: 100%;
+  background-color: transparent;
+  color: black;
+}
+
+input::placeholder {
+  color: black;
+}
+
+#submitBtn {
+  border: none;
+  background-color: transparent;
+}
+
+#searchImg {
+  display: block;
+  max-width: 100%;
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
 }
