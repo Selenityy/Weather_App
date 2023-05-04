@@ -1,5 +1,6 @@
 import { defaultWeather } from "./APILogic";
-import { createNewDiv, setClassAttr } from "./DOMlogic";
+import { createNewDiv } from "./DOMlogic";
+import { weatherIconArray } from "./weatherIconArray";
 
 const defaultData = () => {
   // Current Date
@@ -12,13 +13,45 @@ const defaultData = () => {
 
   //Current Weather
   let tempDiv = document.getElementById("currentTemp");
-  let defaultLocation = "Minneapolis, MN";
-  let endpoint = "/current.json";
+  let maxTempDiv = document.getElementById("currentMaxTemp");
+  let minTempDiv = document.getElementById("currentMinTemp");
 
-  //API Call
-  defaultWeather(endpoint, apiDate, defaultLocation).then((data) => {
+  //Current Condition
+  let conditionDiv = document.getElementById("currentCondition");
+
+  //Current Details
+  let humidity = document.getElementById("humidity");
+  let precipitation = document.getElementById("precipitation");
+  let wind = document.getElementById("wind");
+  let sunrise = document.getElementById("sunrise");
+  let sunset = document.getElementById("sunset");
+  let moonPhase = document.getElementById("moonPhase");
+
+  //API Calls
+  let defaultLocation = "Minneapolis, MN";
+  let forecastEndpoint = "	/forecast.json";
+  defaultWeather(forecastEndpoint, apiDate, defaultLocation).then((data) => {
     console.log(data);
-    tempDiv.innerHTML = data.current.temp_f;
+    tempDiv.innerHTML = Math.round(data.current.temp_f);
+    maxTempDiv.innerHTML = Math.round(
+      data.forecast.forecastday[0].day.maxtemp_f
+    );
+    minTempDiv.innerHTML = Math.round(
+      data.forecast.forecastday[0].day.mintemp_f
+    );
+    conditionDiv.innerHTML =
+      data.current.condition.text + data.current.condition.code;
+    humidity.innerHTML = "Humidity: " + Math.round(data.current.humidity) + "%";
+    precipitation.innerHTML =
+      "Precipitation: " +
+      Math.round(data.forecast.forecastday[0].day.daily_chance_of_rain) +
+      "%";
+    wind.innerHTML = "Wind: " + Math.round(data.current.wind_mph) + "mph";
+    sunrise.innerHTML =
+      "Sunrise: " + data.forecast.forecastday[0].astro.sunrise;
+    sunset.innerHTML = "Sunset: " + data.forecast.forecastday[0].astro.sunset;
+    moonPhase.innerHTML =
+      "Moon Phase: " + data.forecast.forecastday[0].astro.moon_phase;
   });
 };
 
@@ -43,6 +76,7 @@ const createMainContent = () => {
   createNewDiv("wind", "details");
   createNewDiv("sunrise", "details");
   createNewDiv("sunset", "details");
+  createNewDiv("moonPhase", "details");
 
   defaultData();
 };
