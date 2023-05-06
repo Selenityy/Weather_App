@@ -7,7 +7,13 @@ module.exports = {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
     publicPath: " ",
-    assetModuleFilename: "images/[name][ext]",
+    // assetModuleFilename: "[path][name][ext]",
+    assetModuleFilename: (file) => {
+      const filename = path.basename(file.filename);
+      const dirname = path.dirname(file.filename);
+      const assetPath = dirname.split("/").slice(1).join("/");
+      return `${assetPath}/${filename}`;
+    },
   },
   module: {
     rules: [
