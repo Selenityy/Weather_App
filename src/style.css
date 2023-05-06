@@ -10,6 +10,9 @@ html,
 body {
   height: 100%;
   padding: 20px;
+  background-image: url("./assets/backrgound.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #content {
@@ -53,12 +56,6 @@ input::placeholder {
   max-width: 100%;
   width: 15px;
   height: 15px;
-  object-fit: contain;
-}
-
-#currentCondition {
-  width: 20px;
-  height: 20px;
   object-fit: contain;
 }
 
