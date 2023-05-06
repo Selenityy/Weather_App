@@ -37,11 +37,11 @@ const defaultData = () => {
   let forecastEndpoint = "	/forecast.json";
   defaultWeather(forecastEndpoint, apiDate, defaultLocation).then((data) => {
     console.log(data);
-    tempDiv.innerHTML = Math.round(data.current.temp_f) + "F";
+    tempDiv.innerHTML = Math.round(data.current.temp_f) + "°" + "F";
     maxTempDiv.innerHTML =
-      Math.round(data.forecast.forecastday[0].day.maxtemp_f) + "F";
+      Math.round(data.forecast.forecastday[0].day.maxtemp_f) + "°" + "F";
     minTempDiv.innerHTML =
-      Math.round(data.forecast.forecastday[0].day.mintemp_f) + "F";
+      Math.round(data.forecast.forecastday[0].day.mintemp_f) + "°" + "F";
     conditionTextDiv.innerHTML = data.current.condition.text;
     const iconPath = data.current.condition.icon.replace(
       "//cdn.weatherapi.com/weather/64x64/",
@@ -69,7 +69,6 @@ const defaultData = () => {
 };
 
 const createMainContent = () => {
-  console.log("dog");
   // Parent Node
   createNewDiv("mainSection", "content");
 

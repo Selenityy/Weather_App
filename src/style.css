@@ -68,4 +68,5 @@ input::placeholder {
 .hourlyNode {
   display: flex;
   flex-direction: column-reverse;
+  align-items: center;
 }

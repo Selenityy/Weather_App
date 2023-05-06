@@ -33,7 +33,6 @@ const createSearchForm = () => {
 };
 
 const createSearchHeader = () => {
-  console.log("cat");
   createNewDiv("searchBar", "content");
   createNewDiv("searchIcon", "searchBar");
 
