@@ -12,6 +12,16 @@ body {
   padding: 20px;
 }
 
+#content {
+  display: flex;
+  flex-direction: column;
+}
+
+#mainSection {
+  display: flex;
+  flex-direction: column;
+}
+
 #myForm {
   display: flex;
   align-items: center;
@@ -49,4 +59,13 @@ input::placeholder {
   width: 20px;
   height: 20px;
   object-fit: contain;
+}
+
+#hourlyGraph {
+  display: flex;
+}
+
+.hourlyNode {
+  display: flex;
+  flex-direction: column-reverse;
 }
