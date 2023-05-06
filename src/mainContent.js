@@ -1,6 +1,5 @@
 import { defaultWeather } from "./APILogic";
-import { createNewDiv } from "./DOMlogic";
-import { weatherIconArray } from "./weatherIconArray";
+import { createImg, createNewDiv } from "./DOMlogic";
 
 const WEATHER_ICONS = require.context(
   "./assets/weather_icons",
@@ -23,7 +22,7 @@ const defaultData = () => {
   let minTempDiv = document.getElementById("currentMinTemp");
 
   //Current Condition
-  let conditionDiv = document.getElementById("currentCondition");
+  let conditionTextDiv = document.getElementById("currentConditionText");
 
   //Current Details
   let humidity = document.getElementById("humidity");
@@ -43,18 +42,17 @@ const defaultData = () => {
       Math.round(data.forecast.forecastday[0].day.maxtemp_f) + "F";
     minTempDiv.innerHTML =
       Math.round(data.forecast.forecastday[0].day.mintemp_f) + "F";
-    conditionDiv.innerHTML = data.current.condition.text;
+    conditionTextDiv.innerHTML = data.current.condition.text;
     const iconPath = data.current.condition.icon.replace(
       "//cdn.weatherapi.com/weather/64x64/",
       ""
     );
-    let imgDiv = document.createElement("img");
+    let imgDiv = document.getElementById("currentConditionImg");
     WEATHER_ICONS.keys().forEach((filePath) => {
       if (filePath.includes(iconPath)) {
         imgDiv.src = `assets/weather_icons/${filePath}`;
       }
     });
-    conditionDiv.appendChild(imgDiv);
 
     humidity.innerHTML = "Humidity: " + Math.round(data.current.humidity) + "%";
     precipitation.innerHTML =
@@ -82,6 +80,8 @@ const createMainContent = () => {
   createNewDiv("currentTemp", "currentForecastTemp");
   createNewDiv("currentMinTemp", "currentForecastTemp");
   createNewDiv("currentCondition", "currentForecastTemp");
+  createImg("currentConditionImg", "currentCondition");
+  createNewDiv("currentConditionText", "currentCondition");
 
   // Current Forecast Details
   createNewDiv("currentForecastDetails", "mainSection");
@@ -96,4 +96,4 @@ const createMainContent = () => {
   defaultData();
 };
 
-export { createMainContent };
+export { createMainContent, WEATHER_ICONS };
