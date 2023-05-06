@@ -1,5 +1,6 @@
-import { createNewDiv, setClassAttr } from "./DOMlogic";
+import { createNewDiv } from "./DOMlogic";
 import { defaultWeather } from "./APILogic";
+import { WEATHER_ICONS } from "./mainContent";
 
 //API Requests
 const defaultHourlyData = () => {
@@ -7,9 +8,20 @@ const defaultHourlyData = () => {
   let forecastEndpoint = "	/forecast.json";
   let date = new Date();
   let apiDate = date.toISOString().slice(0, 10);
-  let h0 = document.getElementById("hour0");
+  let h0Temp = document.getElementById("hr0temp");
+  let h0Icon = document.getElementById("hr0icon");
   defaultWeather(forecastEndpoint, apiDate, defaultLocation).then((data) => {
-    h0.innerHTML = data.forecast.forecastday[0].hour[0].temp_f;
+    h0Temp.innerHTML = data.forecast.forecastday[0].hour[0].temp_f;
+    const iconPath =
+      data.forecast.forecastday[0].hour[0].condition.icon.replace(
+        "//cdn.weatherapi.com/weather/64x64/",
+        ""
+      );
+    WEATHER_ICONS.keys().forEach((filePath) => {
+      if (filePath.includes(iconPath)) {
+        h0Icon.src = `assets/weather_icons/${filePath}`;
+      }
+    });
   });
 };
 
@@ -19,8 +31,10 @@ const individualHourNodes = () => {
   for (let i = 0; i <= 23; i++) {
     let hourlyDiv = document.createElement("div");
     hourlyDiv.setAttribute("id", "hour" + i);
+    hourlyDiv.setAttribute("class", "hourlyNode");
+    hourlyDiv.innerHTML = i;
 
-    let iconDiv = document.createElement("div");
+    let iconDiv = document.createElement("img");
     iconDiv.setAttribute("id", "hr" + i + "icon");
 
     let tempDiv = document.createElement("div");
