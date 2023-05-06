@@ -2,6 +2,12 @@ import { defaultWeather } from "./APILogic";
 import { createNewDiv } from "./DOMlogic";
 import { weatherIconArray } from "./weatherIconArray";
 
+const WEATHER_ICONS = require.context(
+  "./assets/weather_icons",
+  true,
+  /[a-zA-Z0-9.-]/
+);
+
 const defaultData = () => {
   // Current Date
   let dateDiv = document.getElementById("currentDate");
@@ -32,15 +38,24 @@ const defaultData = () => {
   let forecastEndpoint = "	/forecast.json";
   defaultWeather(forecastEndpoint, apiDate, defaultLocation).then((data) => {
     console.log(data);
-    tempDiv.innerHTML = Math.round(data.current.temp_f);
-    maxTempDiv.innerHTML = Math.round(
-      data.forecast.forecastday[0].day.maxtemp_f
+    tempDiv.innerHTML = Math.round(data.current.temp_f) + "F";
+    maxTempDiv.innerHTML =
+      Math.round(data.forecast.forecastday[0].day.maxtemp_f) + "F";
+    minTempDiv.innerHTML =
+      Math.round(data.forecast.forecastday[0].day.mintemp_f) + "F";
+    conditionDiv.innerHTML = data.current.condition.text;
+    const iconPath = data.current.condition.icon.replace(
+      "//cdn.weatherapi.com/weather/64x64/",
+      ""
     );
-    minTempDiv.innerHTML = Math.round(
-      data.forecast.forecastday[0].day.mintemp_f
-    );
-    conditionDiv.innerHTML =
-      data.current.condition.text + data.current.condition.code;
+    let imgDiv = document.createElement("img");
+    WEATHER_ICONS.keys().forEach((filePath) => {
+      if (filePath.includes(iconPath)) {
+        imgDiv.src = `assets/weather_icons/${filePath}`;
+      }
+    });
+    conditionDiv.appendChild(imgDiv);
+
     humidity.innerHTML = "Humidity: " + Math.round(data.current.humidity) + "%";
     precipitation.innerHTML =
       "Precipitation: " +
