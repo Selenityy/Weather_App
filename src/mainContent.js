@@ -20,6 +20,22 @@ const updateWeather = (data) => {
   let location = document.getElementById("currentLocation");
   location.innerHTML = data.location.name + " " + data.location.region;
 
+  //Current Time
+  let timeNode = document.getElementById("currentTime");
+  let today = new Date();
+  let hours = today.getHours();
+  let minutes = today.getMinutes();
+  let amOrPm = hours < 12 ? "AM" : "PM";
+
+  // Convert to 12-hour format
+  hours = hours % 12 || 12;
+
+  // Add leading zeros to minutes if needed
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+
+  const currentTime = hours + ":" + minutes + " " + amOrPm;
+  timeNode.innerHTML = currentTime;
+
   // Current Date
   let dateDiv = document.getElementById("currentDate");
   let options = { month: "long", day: "numeric", year: "numeric" };
@@ -80,6 +96,7 @@ const createMainContent = () => {
   // Current Forecast Temperature
   createNewDiv("currentForecastTemp", "mainSection");
   createNewDiv("currentLocation", "currentForecastTemp");
+  createNewDiv("currentTime", "currentForecastTemp");
   createNewDiv("currentDate", "currentForecastTemp");
   createNewDiv("currentMaxTemp", "currentForecastTemp");
   createNewDiv("currentTemp", "currentForecastTemp");
