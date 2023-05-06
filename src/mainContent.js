@@ -1,5 +1,6 @@
-import { defaultWeather } from "./APILogic";
+import { findWeather } from "./APILogic";
 import { createImg, createNewDiv } from "./DOMlogic";
+import { forecastEndpoint, date, apiDate } from ".";
 
 const WEATHER_ICONS = require.context(
   "./assets/weather_icons",
@@ -8,10 +9,19 @@ const WEATHER_ICONS = require.context(
 );
 
 const defaultData = () => {
+  let defaultLocation = "Minneapolis, MN";
+  findWeather(forecastEndpoint, apiDate, defaultLocation).then((data) => {
+    updateWeather(data);
+  });
+};
+
+const updateWeather = (data) => {
+  //Location
+  let location = document.getElementById("currentLocation");
+  location.innerHTML = data.location.name + " " + data.location.region;
+
   // Current Date
   let dateDiv = document.getElementById("currentDate");
-  let date = new Date();
-  let apiDate = date.toISOString().slice(0, 10);
   let options = { month: "long", day: "numeric", year: "numeric" };
   let formattedDate = date.toLocaleDateString("en-US", options);
   dateDiv.innerHTML = formattedDate;
@@ -33,39 +43,34 @@ const defaultData = () => {
   let moonPhase = document.getElementById("moonPhase");
 
   //API Calls
-  let defaultLocation = "Minneapolis, MN";
-  let forecastEndpoint = "	/forecast.json";
-  defaultWeather(forecastEndpoint, apiDate, defaultLocation).then((data) => {
-    console.log(data);
-    tempDiv.innerHTML = Math.round(data.current.temp_f) + "°" + "F";
-    maxTempDiv.innerHTML =
-      Math.round(data.forecast.forecastday[0].day.maxtemp_f) + "°" + "F";
-    minTempDiv.innerHTML =
-      Math.round(data.forecast.forecastday[0].day.mintemp_f) + "°" + "F";
-    conditionTextDiv.innerHTML = data.current.condition.text;
-    const iconPath = data.current.condition.icon.replace(
-      "//cdn.weatherapi.com/weather/64x64/",
-      ""
-    );
-    let imgDiv = document.getElementById("currentConditionImg");
-    WEATHER_ICONS.keys().forEach((filePath) => {
-      if (filePath.includes(iconPath)) {
-        imgDiv.src = `assets/weather_icons/${filePath}`;
-      }
-    });
-
-    humidity.innerHTML = "Humidity: " + Math.round(data.current.humidity) + "%";
-    precipitation.innerHTML =
-      "Precipitation: " +
-      Math.round(data.forecast.forecastday[0].day.daily_chance_of_rain) +
-      "%";
-    wind.innerHTML = "Wind: " + Math.round(data.current.wind_mph) + "mph";
-    sunrise.innerHTML =
-      "Sunrise: " + data.forecast.forecastday[0].astro.sunrise;
-    sunset.innerHTML = "Sunset: " + data.forecast.forecastday[0].astro.sunset;
-    moonPhase.innerHTML =
-      "Moon Phase: " + data.forecast.forecastday[0].astro.moon_phase;
+  console.log(data);
+  tempDiv.innerHTML = Math.round(data.current.temp_f) + "°" + "F";
+  maxTempDiv.innerHTML =
+    Math.round(data.forecast.forecastday[0].day.maxtemp_f) + "°" + "F";
+  minTempDiv.innerHTML =
+    Math.round(data.forecast.forecastday[0].day.mintemp_f) + "°" + "F";
+  conditionTextDiv.innerHTML = data.current.condition.text;
+  const iconPath = data.current.condition.icon.replace(
+    "//cdn.weatherapi.com/weather/64x64/",
+    ""
+  );
+  let imgDiv = document.getElementById("currentConditionImg");
+  WEATHER_ICONS.keys().forEach((filePath) => {
+    if (filePath.includes(iconPath)) {
+      imgDiv.src = `assets/weather_icons/${filePath}`;
+    }
   });
+
+  humidity.innerHTML = "Humidity: " + Math.round(data.current.humidity) + "%";
+  precipitation.innerHTML =
+    "Precipitation: " +
+    Math.round(data.forecast.forecastday[0].day.daily_chance_of_rain) +
+    "%";
+  wind.innerHTML = "Wind: " + Math.round(data.current.wind_mph) + "mph";
+  sunrise.innerHTML = "Sunrise: " + data.forecast.forecastday[0].astro.sunrise;
+  sunset.innerHTML = "Sunset: " + data.forecast.forecastday[0].astro.sunset;
+  moonPhase.innerHTML =
+    "Moon Phase: " + data.forecast.forecastday[0].astro.moon_phase;
 };
 
 const createMainContent = () => {
@@ -74,6 +79,7 @@ const createMainContent = () => {
 
   // Current Forecast Temperature
   createNewDiv("currentForecastTemp", "mainSection");
+  createNewDiv("currentLocation", "currentForecastTemp");
   createNewDiv("currentDate", "currentForecastTemp");
   createNewDiv("currentMaxTemp", "currentForecastTemp");
   createNewDiv("currentTemp", "currentForecastTemp");
@@ -95,4 +101,4 @@ const createMainContent = () => {
   defaultData();
 };
 
-export { createMainContent, WEATHER_ICONS };
+export { createMainContent, WEATHER_ICONS, updateWeather };

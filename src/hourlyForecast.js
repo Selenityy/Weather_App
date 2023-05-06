@@ -1,35 +1,40 @@
 import { createNewDiv } from "./DOMlogic";
-import { defaultWeather } from "./APILogic";
+import { findWeather } from "./APILogic";
 import { WEATHER_ICONS } from "./mainContent";
+import { forecastEndpoint, apiDate } from "./index";
+
+let today = new Date();
+let currentHour = today.getHours();
 
 //API Requests for Temp and Icon
 const defaultHourlyData = () => {
   let defaultLocation = "Minneapolis, MN";
-  let forecastEndpoint = "	/forecast.json";
-  let date = new Date();
-  let apiDate = date.toISOString().slice(0, 10);
-  defaultWeather(forecastEndpoint, apiDate, defaultLocation).then((data) => {
-    for (let i = 0; i <= 23; i++) {
-      let temp = document.getElementById(`hr${i}temp`);
-      let icon = document.getElementById(`hr${i}icon`);
-      temp.innerHTML =
-        Math.round(data.forecast.forecastday[0].hour[i].temp_f) + "°" + "F";
-      const iconPath = data.forecast.forecastday[0].hour[
-        i
-      ].condition.icon.replace("//cdn.weatherapi.com/weather/64x64/", "");
-      WEATHER_ICONS.keys().forEach((filePath) => {
-        if (filePath.includes(iconPath)) {
-          icon.src = `assets/weather_icons/${filePath}`;
-        }
-      });
-    }
+  findWeather(forecastEndpoint, apiDate, defaultLocation).then((data) => {
+    updateHourlyWeather(data);
   });
+};
+
+const updateHourlyWeather = (data) => {
+  for (let i = currentHour; i <= 23; i++) {
+    let temp = document.getElementById(`hr${i}temp`);
+    let icon = document.getElementById(`hr${i}icon`);
+    temp.innerHTML =
+      Math.round(data.forecast.forecastday[0].hour[i].temp_f) + "°" + "F";
+    const iconPath = data.forecast.forecastday[0].hour[
+      i
+    ].condition.icon.replace("//cdn.weatherapi.com/weather/64x64/", "");
+    WEATHER_ICONS.keys().forEach((filePath) => {
+      if (filePath.includes(iconPath)) {
+        icon.src = `assets/weather_icons/${filePath}`;
+      }
+    });
+  }
 };
 
 // Create Individual Hours Nodes
 const individualHourNodes = () => {
   let parentDiv = document.getElementById("hourlyGraph");
-  for (let i = 0; i <= 23; i++) {
+  for (let i = currentHour; i <= 23; i++) {
     let hourlyDiv = document.createElement("div");
     hourlyDiv.setAttribute("id", "hour" + i);
     hourlyDiv.setAttribute("class", "hourlyNode");
@@ -58,4 +63,4 @@ const createHourlyForecastFooter = () => {
   defaultHourlyData();
 };
 
-export { createHourlyForecastFooter };
+export { createHourlyForecastFooter, updateHourlyWeather };
