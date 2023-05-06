@@ -8,20 +8,33 @@ const defaultHourlyData = () => {
   let forecastEndpoint = "	/forecast.json";
   let date = new Date();
   let apiDate = date.toISOString().slice(0, 10);
-  let h0Temp = document.getElementById("hr0temp");
-  let h0Icon = document.getElementById("hr0icon");
+  //   let h0Temp = document.getElementById("hr0temp");
+  //   let h0Icon = document.getElementById("hr0icon");
   defaultWeather(forecastEndpoint, apiDate, defaultLocation).then((data) => {
-    h0Temp.innerHTML = data.forecast.forecastday[0].hour[0].temp_f;
-    const iconPath =
-      data.forecast.forecastday[0].hour[0].condition.icon.replace(
-        "//cdn.weatherapi.com/weather/64x64/",
-        ""
-      );
-    WEATHER_ICONS.keys().forEach((filePath) => {
-      if (filePath.includes(iconPath)) {
-        h0Icon.src = `assets/weather_icons/${filePath}`;
-      }
-    });
+    for (let i = 0; i <= 23; i++) {
+      let temp = document.getElementById(`hr${i}temp`);
+      let icon = document.getElementById(`hr${i}icon`);
+      temp.innerHTML = data.forecast.forecastday[0].hour[i].temp_f;
+      const iconPath = data.forecast.forecastday[0].hour[
+        i
+      ].condition.icon.replace("//cdn.weatherapi.com/weather/64x64/", "");
+      WEATHER_ICONS.keys().forEach((filePath) => {
+        if (filePath.includes(iconPath)) {
+          icon.src = `assets/weather_icons/${filePath}`;
+        }
+      });
+    }
+    // h0Temp.innerHTML = data.forecast.forecastday[0].hour[0].temp_f;
+    // const iconPath =
+    //   data.forecast.forecastday[0].hour[0].condition.icon.replace(
+    //     "//cdn.weatherapi.com/weather/64x64/",
+    //     ""
+    //   );
+    // WEATHER_ICONS.keys().forEach((filePath) => {
+    //   if (filePath.includes(iconPath)) {
+    //     h0Icon.src = `assets/weather_icons/${filePath}`;
+    //   }
+    // });
   });
 };
 
