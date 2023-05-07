@@ -1,11 +1,8 @@
 import "./style.css";
 import { createSearchHeader } from "./searchBar";
-import { createMainContent, updateWeather } from "./mainContent";
-import {
-  createHourlyForecastFooter,
-  updateHourlyWeather,
-} from "./hourlyForecast";
-import { findWeather } from "./APILogic";
+import { createMainContent } from "./mainContent";
+import { createHourlyForecastFooter } from "./hourlyForecast";
+import { findWeather, updateWeather, updateHourlyWeather } from "./APILogic";
 
 const baseUrl = "http://api.weatherapi.com/v1";
 const forecastEndpoint = "	/forecast.json";

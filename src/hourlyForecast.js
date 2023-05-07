@@ -1,5 +1,5 @@
 import { createNewDiv } from "./DOMlogic";
-import { findWeather } from "./APILogic";
+import { findWeather, updateHourlyWeather } from "./APILogic";
 import { WEATHER_ICONS } from "./mainContent";
 import { forecastEndpoint, apiDate } from "./index";
 
@@ -14,22 +14,22 @@ const defaultHourlyData = () => {
   });
 };
 
-const updateHourlyWeather = (data) => {
-  for (let i = currentHour; i <= 23; i++) {
-    let temp = document.getElementById(`hr${i}temp`);
-    let icon = document.getElementById(`hr${i}icon`);
-    temp.innerHTML =
-      Math.round(data.forecast.forecastday[0].hour[i].temp_f) + "°" + "F";
-    const iconPath = data.forecast.forecastday[0].hour[
-      i
-    ].condition.icon.replace("//cdn.weatherapi.com/weather/64x64/", "");
-    WEATHER_ICONS.keys().forEach((filePath) => {
-      if (filePath.includes(iconPath)) {
-        icon.src = `assets/weather_icons/${filePath}`;
-      }
-    });
-  }
-};
+// const updateHourlyWeather = (data) => {
+//   for (let i = currentHour; i <= 23; i++) {
+//     let temp = document.getElementById(`hr${i}temp`);
+//     let icon = document.getElementById(`hr${i}icon`);
+//     temp.innerHTML =
+//       Math.round(data.forecast.forecastday[0].hour[i].temp_f) + "°" + "F";
+//     const iconPath = data.forecast.forecastday[0].hour[
+//       i
+//     ].condition.icon.replace("//cdn.weatherapi.com/weather/64x64/", "");
+//     WEATHER_ICONS.keys().forEach((filePath) => {
+//       if (filePath.includes(iconPath)) {
+//         icon.src = `assets/weather_icons/${filePath}`;
+//       }
+//     });
+//   }
+// };
 
 // Create Individual Hours Nodes
 const individualHourNodes = () => {
@@ -63,4 +63,4 @@ const createHourlyForecastFooter = () => {
   defaultHourlyData();
 };
 
-export { createHourlyForecastFooter, updateHourlyWeather };
+export { createHourlyForecastFooter, currentHour };
