@@ -1,4 +1,4 @@
-import { createNewDiv, setClassAttr } from "./DOMlogic";
+import { addText, createNewDiv, setClassAttr } from "./DOMlogic";
 import searchImg from "./assets/searchIcon.png";
 
 const createSearchForm = () => {
@@ -34,9 +34,17 @@ const createSearchForm = () => {
 
 const createSearchHeader = () => {
   createNewDiv("searchBar", "content");
-  createNewDiv("searchIcon", "searchBar");
 
   createNewDiv("searchLocation", "searchBar");
+  createNewDiv("toggleDay", "searchBar");
+
+  createNewDiv("today", "toggleDay");
+  addText("today", "Today");
+  createNewDiv("tomorrow", "toggleDay");
+  addText("tomorrow", "Tomorrow");
+  createNewDiv("threeDay", "toggleDay");
+  addText("threeDay", "3 Day");
+
   createSearchForm();
 };
 
