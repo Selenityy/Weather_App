@@ -22,10 +22,33 @@ let submitBtn = document.getElementById("submitBtn");
 submitBtn.onclick = function (event) {
   event.preventDefault();
   const formValue = document.getElementById("location").value;
-  findWeather(forecastEndpoint, date, formValue).then((data) => {
+  findWeather(forecastEndpoint, apiDate, formValue).then((data) => {
     updateWeather(data);
     updateHourlyWeather(data);
   });
+};
+
+let todayTab = document.getElementById("today");
+todayTab.onclick = function (event) {
+  event.preventDefault();
+  console.log("today");
+  const formValue = document.getElementById("location").value;
+  findWeather(forecastEndpoint, apiDate, formValue).then((data) => {
+    updateWeather(data);
+    updateHourlyWeather(data);
+  });
+};
+
+let tomorrowTab = document.getElementById("tomorrow");
+tomorrowTab.onclick = function (event) {
+  event.preventDefault();
+  console.log("tomorrow");
+};
+
+let threeDayTab = document.getElementById("threeDay");
+threeDayTab.onclick = function (event) {
+  event.preventDefault();
+  console.log("3 day");
 };
 
 export { baseUrl, forecastEndpoint, date, apiDate };
