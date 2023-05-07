@@ -59,6 +59,10 @@ input::placeholder {
   object-fit: contain;
 }
 
+#toggleDay {
+  display: flex;
+}
+
 #hourlyGraph {
   display: flex;
 }
