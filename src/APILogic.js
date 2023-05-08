@@ -1,11 +1,9 @@
 import {
   baseUrl,
   findToday,
-  today,
   todayHour,
   todayMinute,
   findTomorrow,
-  tomorrow,
 } from "./index";
 import { WEATHER_ICONS } from "./mainContent";
 import {
@@ -65,6 +63,26 @@ const updateWeatherToday = (data) => {
   let minute = todayMinute < 10 ? "0" + todayMinute : todayMinute;
   let currentTime = hour + ":" + minute + " " + amOrPm;
 
+  let sunriseTime = data.forecast.forecastday[0].astro.sunrise;
+  let sunriseTimeArray = sunriseTime.split(":");
+  let sunriseHour = parseInt(sunriseTimeArray[0]);
+  let sunriseMinute = sunriseTimeArray[1];
+  if (sunriseHour === 0) {
+    sunriseHour = 12;
+  } else if (sunriseHour > 12) {
+    sunriseHour = sunriseHour - 12;
+  }
+
+  let sunsetTime = data.forecast.forecastday[0].astro.sunset;
+  let sunsetTimeArray = sunsetTime.split(":");
+  let sunsetHour = parseInt(sunsetTimeArray[0]);
+  let sunsetMinute = sunsetTimeArray[1];
+  if (sunsetHour === 0) {
+    sunsetHour = 12;
+  } else if (sunsetHour > 12) {
+    sunsetHour = sunsetHour - 12;
+  }
+
   location.innerHTML = data.location.name + "," + " " + data.location.region;
   timeNode.innerHTML = currentTime;
   let formattedDate = findToday.toLocaleDateString("en-US", options);
@@ -91,8 +109,8 @@ const updateWeatherToday = (data) => {
     Math.round(data.forecast.forecastday[0].day.daily_chance_of_rain) +
     "%";
   wind.innerHTML = "Wind: " + Math.round(data.current.wind_mph) + "mph";
-  sunrise.innerHTML = "Sunrise: " + data.forecast.forecastday[0].astro.sunrise;
-  sunset.innerHTML = "Sunset: " + data.forecast.forecastday[0].astro.sunset;
+  sunrise.innerHTML = "Sunrise: " + sunriseHour + ":" + sunriseMinute;
+  sunset.innerHTML = "Sunset: " + sunsetHour + ":" + sunsetMinute;
   moonPhase.innerHTML =
     "Moon Phase: " + data.forecast.forecastday[0].astro.moon_phase;
 };
@@ -116,6 +134,26 @@ const updateWeatherTomorrow = (data) => {
 
   // Create Date Variable
   let options = { month: "long", day: "numeric", year: "numeric" };
+
+  let sunriseTime = data.forecast.forecastday[0].astro.sunrise;
+  let sunriseTimeArray = sunriseTime.split(":");
+  let sunriseHour = parseInt(sunriseTimeArray[0]);
+  let sunriseMinute = sunriseTimeArray[1];
+  if (sunriseHour === 0) {
+    sunriseHour = 12;
+  } else if (sunriseHour > 12) {
+    sunriseHour = sunriseHour - 12;
+  }
+
+  let sunsetTime = data.forecast.forecastday[0].astro.sunset;
+  let sunsetTimeArray = sunsetTime.split(":");
+  let sunsetHour = parseInt(sunsetTimeArray[0]);
+  let sunsetMinute = sunsetTimeArray[1];
+  if (sunsetHour === 0) {
+    sunsetHour = 12;
+  } else if (sunsetHour > 12) {
+    sunsetHour = sunsetHour - 12;
+  }
 
   location.innerHTML = data.location.name + "," + " " + data.location.region;
   timeNode.innerHTML = "";
@@ -146,8 +184,8 @@ const updateWeatherTomorrow = (data) => {
     "%";
   wind.innerHTML =
     "Wind: " + Math.round(data.forecast.forecastday[0].day.maxwind_mph) + "mph";
-  sunrise.innerHTML = "Sunrise: " + data.forecast.forecastday[0].astro.sunrise;
-  sunset.innerHTML = "Sunset: " + data.forecast.forecastday[0].astro.sunset;
+  sunrise.innerHTML = "Sunrise: " + sunriseHour + ":" + sunriseMinute;
+  sunset.innerHTML = "Sunset: " + sunsetHour + ":" + sunsetMinute;
   moonPhase.innerHTML =
     "Moon Phase: " + data.forecast.forecastday[0].astro.moon_phase;
 };
