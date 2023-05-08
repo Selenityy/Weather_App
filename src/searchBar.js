@@ -1,4 +1,4 @@
-import { addText, createNewDiv, setClassAttr } from "./DOMlogic";
+import { addText, createNewDiv } from "./DOMlogic";
 import searchImg from "./assets/searchIcon.png";
 
 const createSearchForm = () => {
