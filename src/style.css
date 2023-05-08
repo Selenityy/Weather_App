@@ -10,7 +10,7 @@ html,
 body {
   height: 100%;
   padding: 20px;
-  background-image: url("./assets/backrgound.png");
+  background-image: url("./assets/background.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
