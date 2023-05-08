@@ -1,5 +1,5 @@
 import { createNewDiv } from "./DOMlogic";
-import { findWeather, updateWeather, updateHourlyWeatherToday } from "./APILogic";
+import { findWeather, updateHourlyWeatherToday } from "./APILogic";
 import { forecastEndpoint, today, todayHour } from "./index";
 
 //API Requests for Temp and Icon

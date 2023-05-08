@@ -4,8 +4,9 @@ import { createMainContent } from "./mainContent";
 import { createHourlyForecastFooter } from "./hourlyForecast";
 import {
   findWeather,
-  updateWeather,
+  updateWeatherToday,
   updateHourlyWeatherToday,
+  updateWeatherTomorrow,
   updateHourlyWeatherTomorrow,
 } from "./APILogic";
 
@@ -45,8 +46,9 @@ submitBtn.onclick = function (event) {
   event.preventDefault();
   const formValue = document.getElementById("location").value;
   findWeather(forecastEndpoint, today, formValue).then((data) => {
-    updateWeather(data);
+    updateWeatherToday(data);
     updateHourlyWeatherToday(data);
+    console.log(data);
   });
 };
 
@@ -55,7 +57,7 @@ todayTab.onclick = function (event) {
   event.preventDefault();
   const formValue = document.getElementById("location").value;
   findWeather(forecastEndpoint, today, formValue).then((data) => {
-    updateWeather(data);
+    updateWeatherToday(data);
     updateHourlyWeatherToday(data);
   });
 };
@@ -65,7 +67,7 @@ tomorrowTab.onclick = function (event) {
   event.preventDefault();
   const formValue = document.getElementById("location").value;
   findWeather(forecastEndpoint, tomorrow, formValue).then((data) => {
-    updateWeather(data);
+    updateWeatherTomorrow(data);
     updateHourlyWeatherTomorrow(data);
   });
 };
@@ -75,7 +77,7 @@ threeDayTab.onclick = function (event) {
   event.preventDefault();
   const formValue = document.getElementById("location").value;
   findWeather(forecastEndpoint, apiToday, formValue).then((data) => {
-    updateWeather(data);
+    console.log("3 day");
   });
 };
 

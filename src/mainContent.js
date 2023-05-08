@@ -1,4 +1,4 @@
-import { findWeather, updateWeather } from "./APILogic";
+import { findWeather, updateWeatherToday } from "./APILogic";
 import { createImg, createNewDiv } from "./DOMlogic";
 import { forecastEndpoint, today } from ".";
 
@@ -11,7 +11,7 @@ const WEATHER_ICONS = require.context(
 const defaultData = () => {
   let defaultLocation = "Minneapolis, MN";
   findWeather(forecastEndpoint, today, defaultLocation).then((data) => {
-    updateWeather(data);
+    updateWeatherToday(data);
   });
 };
 
