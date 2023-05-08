@@ -13,32 +13,6 @@ import {
   individualHourNodesTomorrow,
 } from "./hourlyForecast";
 
-//Find Nodes
-let location = document.getElementById("currentLocation");
-let timeNode = document.getElementById("currentTime");
-let dateDiv = document.getElementById("currentDate");
-let maxTempDiv = document.getElementById("currentMaxTemp");
-let tempDiv = document.getElementById("currentTemp");
-let minTempDiv = document.getElementById("currentMinTemp");
-let imgDiv = document.getElementById("currentConditionImg");
-let conditionTextDiv = document.getElementById("currentConditionText");
-
-let humidity = document.getElementById("humidity");
-let precipitation = document.getElementById("precipitation");
-let wind = document.getElementById("wind");
-let sunrise = document.getElementById("sunrise");
-let sunset = document.getElementById("sunset");
-let moonPhase = document.getElementById("moonPhase");
-
-// Convert to 12-hour format and add leading zeros to minutes if needed
-let amOrPm = todayHour < 12 ? "AM" : "PM";
-let hour = todayHour % 12 || 12;
-let minute = todayMinute < 10 ? "0" + todayMinute : todayMinute;
-let currentTime = hour + ":" + minute + " " + amOrPm;
-
-// Create Date Variable
-let options = { month: "long", day: "numeric", year: "numeric" };
-
 async function findWeather(endpoint, date, location) {
   let response;
   try {
