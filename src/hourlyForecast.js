@@ -64,10 +64,7 @@ const individualHourNodesTomorrow = () => {
 };
 
 const createHourlyForecastFooter = () => {
-  createNewDiv("hourlyGraph", "content");
-
   individualHourNodesToday();
-
   defaultHourlyData();
 };
 

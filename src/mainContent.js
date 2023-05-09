@@ -16,9 +16,6 @@ const defaultData = () => {
 };
 
 const createMainContent = () => {
-  // Parent Node
-  createNewDiv("mainSection", "content");
-
   // Current Forecast Temperature
   createNewDiv("currentForecastTemp", "mainSection");
   createNewDiv("currentLocation", "currentForecastTemp");

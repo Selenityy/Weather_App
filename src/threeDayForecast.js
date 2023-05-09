@@ -58,4 +58,11 @@ const createThreeDayForecast = () => {
   console.log("completed");
 };
 
-export { createThreeDayForecast };
+const removeThreeDayForecast = () => {
+  let parent = document.getElementById("mainSection");
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+};
+
+export { createThreeDayForecast, removeThreeDayForecast };

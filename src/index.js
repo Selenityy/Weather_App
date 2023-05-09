@@ -1,4 +1,5 @@
 import "./style.css";
+import { createNewDiv } from "./DOMlogic";
 import { createSearchHeader } from "./searchBar";
 import { createMainContent } from "./mainContent";
 import { createHourlyForecastFooter } from "./hourlyForecast";
@@ -9,7 +10,10 @@ import {
   updateWeatherTomorrow,
   updateHourlyWeatherTomorrow,
 } from "./APILogic";
-import { createThreeDayForecast } from "./threeDayForecast";
+import {
+  createThreeDayForecast,
+  removeThreeDayForecast,
+} from "./threeDayForecast";
 
 // Dates
 const baseUrl = "http://api.weatherapi.com/v1";
@@ -35,12 +39,15 @@ let findThreeDay = new Date(
 let threeDay = findThreeDay.toISOString().slice(0, 10);
 
 let degreesFar = true;
+let threeDayVar = false;
 
 //Nodes and Default Data
 createSearchHeader();
 
+createNewDiv("mainSection", "content");
 createMainContent();
 
+createNewDiv("hourlyGraph", "content");
 createHourlyForecastFooter();
 
 //On clicks
@@ -75,26 +82,50 @@ let todayTab = document.getElementById("today");
 todayTab.onclick = function (event) {
   event.preventDefault();
   const formValue = document.getElementById("location").value;
-  findWeather(forecastEndpoint, today, formValue).then((data) => {
-    updateWeatherToday(data);
-    updateHourlyWeatherToday(data);
-  });
+
+  if (threeDayVar === true) {
+    removeThreeDayForecast();
+    createMainContent();
+    createHourlyForecastFooter();
+    threeDayVar = false;
+    findWeather(forecastEndpoint, today, formValue).then((data) => {
+      updateWeatherToday(data);
+      updateHourlyWeatherToday(data);
+    });
+  } else if (threeDayVar === false) {
+    findWeather(forecastEndpoint, today, formValue).then((data) => {
+      updateWeatherToday(data);
+      updateHourlyWeatherToday(data);
+    });
+  }
 };
 
 let tomorrowTab = document.getElementById("tomorrow");
 tomorrowTab.onclick = function (event) {
   event.preventDefault();
   const formValue = document.getElementById("location").value;
-  findWeather(forecastEndpoint, tomorrow, formValue).then((data) => {
-    updateWeatherTomorrow(data);
-    updateHourlyWeatherTomorrow(data);
-  });
+  if (threeDayVar === true) {
+    removeThreeDayForecast();
+    createMainContent();
+    createHourlyForecastFooter();
+    threeDayVar = false;
+    findWeather(forecastEndpoint, tomorrow, formValue).then((data) => {
+      updateWeatherTomorrow(data);
+      updateHourlyWeatherTomorrow(data);
+    });
+  } else if (threeDayVar === false) {
+    findWeather(forecastEndpoint, tomorrow, formValue).then((data) => {
+      updateWeatherTomorrow(data);
+      updateHourlyWeatherTomorrow(data);
+    });
+  }
 };
 
 let threeDayTab = document.getElementById("threeDay");
 threeDayTab.onclick = function (event) {
   event.preventDefault();
   createThreeDayForecast();
+  threeDayVar = true;
   //   const formValue = document.getElementById("location").value;
   //   findWeather(forecastEndpoint, today, formValue).then((data) => {
   //     console.log("today");
