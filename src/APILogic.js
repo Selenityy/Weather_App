@@ -235,7 +235,6 @@ const updateHourlyWeatherTomorrow = (data) => {
 };
 
 const updateThreeDay1 = (data) => {
-  console.log("HI");
   let options = { month: "long", day: "numeric", year: "numeric" };
   let formattedDate = findToday.toLocaleDateString("en-US", options);
   let location = document.getElementById("threeDayLocation");
@@ -245,7 +244,6 @@ const updateThreeDay1 = (data) => {
   let condition = document.getElementById("condition1");
   let icon = document.getElementById("icon1");
   let rain = document.getElementById("rainPercent1");
-  let rainIcon = document.getElementById("rainIcon1");
 
   location.innerHTML = data.location.name + "," + " " + data.location.region;
   date.innerHTML = formattedDate;
@@ -270,6 +268,74 @@ const updateThreeDay1 = (data) => {
   );
 };
 
+const updateThreeDay2 = (data) => {
+  let options = { month: "long", day: "numeric", year: "numeric" };
+  let formattedDate = findToday.toLocaleDateString("en-US", options);
+  let location = document.getElementById("threeDayLocation");
+  let date = document.getElementById("date2");
+  let max = document.getElementById("high2");
+  let min = document.getElementById("low2");
+  let condition = document.getElementById("condition2");
+  let icon = document.getElementById("icon2");
+  let rain = document.getElementById("rainPercent2");
+
+  location.innerHTML = data.location.name + "," + " " + data.location.region;
+  date.innerHTML = formattedDate; //fix date
+  max.innerHTML =
+    Math.round(data.forecast.forecastday[0].day.maxtemp_f) + "°" + "F";
+  min.innerHTML =
+    Math.round(data.forecast.forecastday[0].day.mintemp_f) + "°" + "F";
+  condition.innerHTML = data.current.condition.text;
+
+  const iconPath = data.current.condition.icon.replace(
+    "//cdn.weatherapi.com/weather/64x64/",
+    ""
+  );
+  WEATHER_ICONS.keys().forEach((filePath) => {
+    if (filePath.includes(iconPath)) {
+      icon.src = `assets/weather_icons/${filePath}`;
+    }
+  });
+
+  rain.innerHTML = Math.round(
+    data.forecast.forecastday[0].day.daily_chance_of_rain
+  );
+};
+
+const updateThreeDay3 = (data) => {
+    let options = { month: "long", day: "numeric", year: "numeric" };
+    let formattedDate = findToday.toLocaleDateString("en-US", options);
+    let location = document.getElementById("threeDayLocation");
+    let date = document.getElementById("date3");
+    let max = document.getElementById("high3");
+    let min = document.getElementById("low3");
+    let condition = document.getElementById("condition3");
+    let icon = document.getElementById("icon3");
+    let rain = document.getElementById("rainPercent3");
+  
+    location.innerHTML = data.location.name + "," + " " + data.location.region;
+    date.innerHTML = formattedDate; //fix date
+    max.innerHTML =
+      Math.round(data.forecast.forecastday[0].day.maxtemp_f) + "°" + "F";
+    min.innerHTML =
+      Math.round(data.forecast.forecastday[0].day.mintemp_f) + "°" + "F";
+    condition.innerHTML = data.current.condition.text;
+  
+    const iconPath = data.current.condition.icon.replace(
+      "//cdn.weatherapi.com/weather/64x64/",
+      ""
+    );
+    WEATHER_ICONS.keys().forEach((filePath) => {
+      if (filePath.includes(iconPath)) {
+        icon.src = `assets/weather_icons/${filePath}`;
+      }
+    });
+  
+    rain.innerHTML = Math.round(
+      data.forecast.forecastday[0].day.daily_chance_of_rain
+    );
+  };
+
 export {
   findWeather,
   updateWeatherToday,
@@ -278,4 +344,6 @@ export {
   updateHourlyWeatherTomorrow,
   updateWeatherThreeDay,
   updateThreeDay1,
+  updateThreeDay2,
+  updateThreeDay3,
 };
