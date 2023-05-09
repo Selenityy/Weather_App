@@ -26,6 +26,12 @@ body {
   gap: 200px;
 }
 
+#searchLocation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 #myForm {
   display: flex;
   align-items: center;
@@ -112,6 +118,9 @@ input::placeholder {
 
 .toggle .slider::before {
   content: "F";
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   top: 0;
   left: 0;
