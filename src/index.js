@@ -9,6 +9,7 @@ import {
   updateHourlyWeatherToday,
   updateWeatherTomorrow,
   updateHourlyWeatherTomorrow,
+  updateThreeDay1,
 } from "./APILogic";
 import {
   createThreeDayForecast,
@@ -126,19 +127,18 @@ threeDayTab.onclick = function (event) {
   event.preventDefault();
   createThreeDayForecast();
   threeDayVar = true;
-  //   const formValue = document.getElementById("location").value;
-  //   findWeather(forecastEndpoint, today, formValue).then((data) => {
-  //     console.log("today");
-  //     console.log(data);
-  //   });
-  //   findWeather(forecastEndpoint, tomorrow, formValue).then((data) => {
-  //     console.log("tomorrow");
-  //     console.log(data);
-  //   });
-  //   findWeather(forecastEndpoint, threeDay, formValue).then((data) => {
-  //     console.log("3 day");
-  //     console.log(data);
-  //   });
+  const formValue = document.getElementById("location").value;
+  findWeather(forecastEndpoint, today, formValue).then((data) => {
+    updateThreeDay1(data);
+  });
+  findWeather(forecastEndpoint, tomorrow, formValue).then((data) => {
+    console.log("tomorrow");
+    console.log(data);
+  });
+  findWeather(forecastEndpoint, threeDay, formValue).then((data) => {
+    console.log("3 day");
+    console.log(data);
+  });
 };
 
 export {
