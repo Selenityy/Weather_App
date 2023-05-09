@@ -72,3 +72,11 @@ input::placeholder {
   flex-direction: column-reverse;
   align-items: center;
 }
+
+#rainIcon1,
+#rainIcon2,
+#rainIcon3 {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
