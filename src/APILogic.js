@@ -193,10 +193,6 @@ const updateWeatherTomorrow = (data) => {
     "Moon Phase: " + data.forecast.forecastday[0].astro.moon_phase;
 };
 
-const updateWeatherThreeDay = () => {
-  console.log("hi");
-};
-
 const updateHourlyWeatherToday = (data) => {
   individualHourNodesToday();
   let todayVar = new Date();
@@ -343,7 +339,6 @@ export {
   updateHourlyWeatherToday,
   updateWeatherTomorrow,
   updateHourlyWeatherTomorrow,
-  updateWeatherThreeDay,
   updateThreeDay1,
   updateThreeDay2,
   updateThreeDay3,
