@@ -4,6 +4,7 @@ import {
   todayHour,
   todayMinute,
   findTomorrow,
+  findThreeDay,
 } from "./index";
 import { WEATHER_ICONS } from "./mainContent";
 import {
@@ -270,7 +271,7 @@ const updateThreeDay1 = (data) => {
 
 const updateThreeDay2 = (data) => {
   let options = { month: "long", day: "numeric", year: "numeric" };
-  let formattedDate = findToday.toLocaleDateString("en-US", options);
+  let formattedDate = findTomorrow.toLocaleDateString("en-US", options);
   let location = document.getElementById("threeDayLocation");
   let date = document.getElementById("date2");
   let max = document.getElementById("high2");
@@ -280,7 +281,7 @@ const updateThreeDay2 = (data) => {
   let rain = document.getElementById("rainPercent2");
 
   location.innerHTML = data.location.name + "," + " " + data.location.region;
-  date.innerHTML = formattedDate; //fix date
+  date.innerHTML = formattedDate;
   max.innerHTML =
     Math.round(data.forecast.forecastday[0].day.maxtemp_f) + "°" + "F";
   min.innerHTML =
@@ -303,38 +304,38 @@ const updateThreeDay2 = (data) => {
 };
 
 const updateThreeDay3 = (data) => {
-    let options = { month: "long", day: "numeric", year: "numeric" };
-    let formattedDate = findToday.toLocaleDateString("en-US", options);
-    let location = document.getElementById("threeDayLocation");
-    let date = document.getElementById("date3");
-    let max = document.getElementById("high3");
-    let min = document.getElementById("low3");
-    let condition = document.getElementById("condition3");
-    let icon = document.getElementById("icon3");
-    let rain = document.getElementById("rainPercent3");
-  
-    location.innerHTML = data.location.name + "," + " " + data.location.region;
-    date.innerHTML = formattedDate; //fix date
-    max.innerHTML =
-      Math.round(data.forecast.forecastday[0].day.maxtemp_f) + "°" + "F";
-    min.innerHTML =
-      Math.round(data.forecast.forecastday[0].day.mintemp_f) + "°" + "F";
-    condition.innerHTML = data.current.condition.text;
-  
-    const iconPath = data.current.condition.icon.replace(
-      "//cdn.weatherapi.com/weather/64x64/",
-      ""
-    );
-    WEATHER_ICONS.keys().forEach((filePath) => {
-      if (filePath.includes(iconPath)) {
-        icon.src = `assets/weather_icons/${filePath}`;
-      }
-    });
-  
-    rain.innerHTML = Math.round(
-      data.forecast.forecastday[0].day.daily_chance_of_rain
-    );
-  };
+  let options = { month: "long", day: "numeric", year: "numeric" };
+  let formattedDate = findThreeDay.toLocaleDateString("en-US", options);
+  let location = document.getElementById("threeDayLocation");
+  let date = document.getElementById("date3");
+  let max = document.getElementById("high3");
+  let min = document.getElementById("low3");
+  let condition = document.getElementById("condition3");
+  let icon = document.getElementById("icon3");
+  let rain = document.getElementById("rainPercent3");
+
+  location.innerHTML = data.location.name + "," + " " + data.location.region;
+  date.innerHTML = formattedDate;
+  max.innerHTML =
+    Math.round(data.forecast.forecastday[0].day.maxtemp_f) + "°" + "F";
+  min.innerHTML =
+    Math.round(data.forecast.forecastday[0].day.mintemp_f) + "°" + "F";
+  condition.innerHTML = data.current.condition.text;
+
+  const iconPath = data.current.condition.icon.replace(
+    "//cdn.weatherapi.com/weather/64x64/",
+    ""
+  );
+  WEATHER_ICONS.keys().forEach((filePath) => {
+    if (filePath.includes(iconPath)) {
+      icon.src = `assets/weather_icons/${filePath}`;
+    }
+  });
+
+  rain.innerHTML = Math.round(
+    data.forecast.forecastday[0].day.daily_chance_of_rain
+  );
+};
 
 export {
   findWeather,
