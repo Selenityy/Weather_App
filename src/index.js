@@ -9,6 +9,7 @@ import {
   updateWeatherTomorrow,
   updateHourlyWeatherTomorrow,
 } from "./APILogic";
+import { createThreeDayForecast } from "./threeDayForecast";
 
 // Dates
 const baseUrl = "http://api.weatherapi.com/v1";
@@ -33,6 +34,8 @@ let findThreeDay = new Date(
 );
 let threeDay = findThreeDay.toISOString().slice(0, 10);
 
+let degreesFar = true;
+
 //Nodes and Default Data
 createSearchHeader();
 
@@ -46,11 +49,27 @@ submitBtn.onclick = function (event) {
   event.preventDefault();
   const formValue = document.getElementById("location").value;
   findWeather(forecastEndpoint, today, formValue).then((data) => {
-    updateWeatherToday(data);
-    updateHourlyWeatherToday(data);
-    console.log(data);
+    if (degreesFar === true) {
+      updateWeatherToday(data);
+      updateHourlyWeatherToday(data);
+    } else if (degreesFar === false) {
+      console.log("Celsius");
+    }
   });
 };
+
+// let toggleBtn = document.getElementById("toggleC/F");
+// toggleBtn.onclick = function (event) {
+//   console.log("am I pressed?");
+//   event.preventDefault();
+//   if (degreesFar === true) {
+//     degreesFar = false;
+//     toggleBtn.innerHTML = "Celsius";
+//   } else if (degreesFar === false) {
+//     degreesFar = true;
+//     toggleBtn.innerHTML = "Fahrenheit";
+//   }
+// };
 
 let todayTab = document.getElementById("today");
 todayTab.onclick = function (event) {
@@ -75,10 +94,20 @@ tomorrowTab.onclick = function (event) {
 let threeDayTab = document.getElementById("threeDay");
 threeDayTab.onclick = function (event) {
   event.preventDefault();
-  const formValue = document.getElementById("location").value;
-  findWeather(forecastEndpoint, apiToday, formValue).then((data) => {
-    console.log("3 day");
-  });
+  createThreeDayForecast();
+  //   const formValue = document.getElementById("location").value;
+  //   findWeather(forecastEndpoint, today, formValue).then((data) => {
+  //     console.log("today");
+  //     console.log(data);
+  //   });
+  //   findWeather(forecastEndpoint, tomorrow, formValue).then((data) => {
+  //     console.log("tomorrow");
+  //     console.log(data);
+  //   });
+  //   findWeather(forecastEndpoint, threeDay, formValue).then((data) => {
+  //     console.log("3 day");
+  //     console.log(data);
+  //   });
 };
 
 export {
