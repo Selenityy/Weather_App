@@ -33,7 +33,7 @@ const createSearchForm = () => {
 };
 
 const createToggleBtn = () => {
-  let parentDiv = document.getElementById("searchBar");
+  let parentDiv = document.getElementById("searchLocation");
 
   let label = document.createElement("label");
   label.setAttribute("class", "toggle");
@@ -52,7 +52,6 @@ const createSearchHeader = () => {
   createNewDiv("searchBar", "content");
 
   createNewDiv("searchLocation", "searchBar");
-  createToggleBtn();
   createNewDiv("toggleDay", "searchBar");
 
   createNewDiv("today", "toggleDay");
@@ -63,6 +62,7 @@ const createSearchHeader = () => {
   addText("threeDay", "3 Day");
 
   createSearchForm();
+  createToggleBtn();
 };
 
 export { createSearchHeader, createSearchForm };
