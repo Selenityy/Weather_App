@@ -27,4 +27,12 @@ const addText = (divId, desiredText) => {
   div.textContent = desiredText;
 };
 
-export { createNewDiv, setClassAttr, createImg, addText };
+// Create button
+const addBtn = (newBtnId, parentDivId) => {
+  let parentDiv = document.getElementById(parentDivId);
+  let newBtn = document.createElement("button");
+  newBtn.setAttribute("id", newBtnId);
+  parentDiv.appendChild(newBtn);
+};
+
+export { createNewDiv, setClassAttr, createImg, addText, addBtn };

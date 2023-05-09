@@ -32,10 +32,32 @@ const createSearchForm = () => {
   form.appendChild(button);
 };
 
+const createToggleBtn = () => {
+  let parentDiv = document.getElementById("searchBar");
+  let label = document.createElement("label");
+  label.setAttribute("class", "switch_btn_C/F");
+  parentDiv.appendChild(label);
+
+  let input = document.createElement("input");
+  input.setAttribute("type", "checkbox");
+  input.setAttribute("name", "typeofTemp");
+  input.setAttribute("id", "typeofTemp");
+  input.setAttribute("value", "F");
+  label.appendChild(input);
+
+  let label2 = document.createElement("label");
+  label2.setAttribute("for", "typeofTemp");
+  label2.setAttribute("data-on", "F");
+  label2.setAttribute("data-off", "C");
+  label2.setAttribute("class", "switch_btn_C/F_inner");
+  label.appendChild(label2);
+};
+
 const createSearchHeader = () => {
   createNewDiv("searchBar", "content");
 
   createNewDiv("searchLocation", "searchBar");
+  createToggleBtn();
   createNewDiv("toggleDay", "searchBar");
 
   createNewDiv("today", "toggleDay");
