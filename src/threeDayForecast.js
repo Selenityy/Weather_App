@@ -19,13 +19,13 @@ const createThreeDayForecast = () => {
   createNewDiv("high1", "temp1");
   createNewDiv("low1", "temp1");
   createNewDiv("weather1", "day1");
-  createNewDiv("icon1", "weather1");
+  createImg("icon1", "weather1");
   createNewDiv("condition1", "weather1");
   createNewDiv("rainChance1", "day1");
   createNewDiv("rainPercent1", "rainChance1");
   createImg("rainIcon1", "rainChance1");
-  let icon1img = document.getElementById("rainIcon1");
-  icon1img.src = raindropImg;
+  let rain1img = document.getElementById("rainIcon1");
+  rain1img.src = raindropImg;
 
   createNewDiv("day2", "threeDayDates");
   createNewDiv("date2", "day2");
@@ -33,13 +33,13 @@ const createThreeDayForecast = () => {
   createNewDiv("high2", "temp2");
   createNewDiv("low2", "temp2");
   createNewDiv("weather2", "day2");
-  createNewDiv("icon2", "weather2");
+  createImg("icon2", "weather2");
   createNewDiv("condition2", "weather2");
   createNewDiv("rainChance2", "day2");
   createNewDiv("rainPercent2", "rainChance2");
   createImg("rainIcon2", "rainChance2");
-  let icon2img = document.getElementById("rainIcon2");
-  icon2img.src = raindropImg;
+  let rain2img = document.getElementById("rainIcon2");
+  rain2img.src = raindropImg;
 
   createNewDiv("day3", "threeDayDates");
   createNewDiv("date3", "day3");
@@ -47,13 +47,13 @@ const createThreeDayForecast = () => {
   createNewDiv("high3", "temp3");
   createNewDiv("low3", "temp3");
   createNewDiv("weather3", "day3");
-  createNewDiv("icon3", "weather3");
+  createImg("icon3", "weather3");
   createNewDiv("condition3", "weather3");
   createNewDiv("rainChance3", "day3");
   createNewDiv("rainPercent3", "rainChance3");
   createImg("rainIcon3", "rainChance3");
-  let icon3img = document.getElementById("rainIcon3");
-  icon3img.src = raindropImg;
+  let rain3img = document.getElementById("rainIcon3");
+  rain3img.src = raindropImg;
 
   console.log("completed");
 };
