@@ -1,4 +1,3 @@
-import { createNewDiv } from "./DOMlogic";
 import { findWeather, updateHourlyWeatherToday } from "./APILogic";
 import { forecastEndpoint, today, todayHour } from "./index";
 
