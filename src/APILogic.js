@@ -37,6 +37,7 @@ async function findWeather(endpoint, date, location) {
 }
 
 const updateWeatherToday = (data) => {
+  console.log(data);
   //Find Nodes
   let location = document.getElementById("currentLocation");
   let timeNode = document.getElementById("currentTime");
@@ -116,6 +117,7 @@ const updateWeatherToday = (data) => {
 };
 
 const updateWeatherTomorrow = (data) => {
+  console.log(data);
   //Find Nodes
   let location = document.getElementById("currentLocation");
   let timeNode = document.getElementById("currentTime");
@@ -190,6 +192,10 @@ const updateWeatherTomorrow = (data) => {
     "Moon Phase: " + data.forecast.forecastday[0].astro.moon_phase;
 };
 
+const updateWeatherThreeDay = () => {
+  console.log("hi");
+};
+
 const updateHourlyWeatherToday = (data) => {
   individualHourNodesToday();
   let todayVar = new Date();
@@ -234,4 +240,5 @@ export {
   updateHourlyWeatherToday,
   updateWeatherTomorrow,
   updateHourlyWeatherTomorrow,
+  updateWeatherThreeDay,
 };
