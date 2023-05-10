@@ -1,4 +1,4 @@
-import { addText, createNewDiv } from "./DOMlogic";
+import { addText, createNewDiv, addBtn } from "./DOMlogic";
 import searchImg from "./assets/searchIcon.png";
 
 const createSearchForm = () => {
@@ -10,6 +10,16 @@ const createSearchForm = () => {
   form.setAttribute("method", "GET");
   parentDiv.appendChild(form);
 
+  let button = document.createElement("button");
+  let img = document.createElement("img");
+  img.setAttribute("id", "searchImg");
+  img.src = searchImg;
+  button.setAttribute("type", "submit");
+  button.setAttribute("id", "submitBtn");
+  button.innerHTML = "";
+  button.appendChild(img);
+  form.appendChild(button);
+
   let label = document.createElement("label");
   label.setAttribute("for", "location");
   form.appendChild(label);
@@ -20,16 +30,6 @@ const createSearchForm = () => {
   input.setAttribute("name", "location");
   input.setAttribute("placeholder", "Search Location...");
   form.appendChild(input);
-
-  let button = document.createElement("button");
-  let img = document.createElement("img");
-  img.setAttribute("id", "searchImg");
-  img.src = searchImg;
-  button.setAttribute("type", "submit");
-  button.setAttribute("id", "submitBtn");
-  button.innerHTML = "";
-  button.appendChild(img);
-  form.appendChild(button);
 };
 
 const createToggleBtn = () => {
@@ -54,11 +54,11 @@ const createSearchHeader = () => {
   createNewDiv("searchLocation", "searchBar");
   createNewDiv("toggleDay", "searchBar");
 
-  createNewDiv("today", "toggleDay");
+  addBtn("today", "toggleDay");
   addText("today", "Today");
-  createNewDiv("tomorrow", "toggleDay");
+  addBtn("tomorrow", "toggleDay");
   addText("tomorrow", "Tomorrow");
-  createNewDiv("threeDay", "toggleDay");
+  addBtn("threeDay", "toggleDay");
   addText("threeDay", "3 Day");
 
   createSearchForm();

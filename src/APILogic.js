@@ -45,6 +45,7 @@ const updateWeatherToday = (data) => {
   let dateDiv = document.getElementById("currentDate");
   let maxTempDiv = document.getElementById("currentMaxTemp");
   let tempDiv = document.getElementById("currentTemp");
+  let degree = document.getElementById("tempF");
   let minTempDiv = document.getElementById("currentMinTemp");
   let imgDiv = document.getElementById("currentConditionImg");
   let conditionTextDiv = document.getElementById("currentConditionText");
@@ -91,7 +92,8 @@ const updateWeatherToday = (data) => {
   dateDiv.innerHTML = formattedDate;
   maxTempDiv.innerHTML =
     Math.round(data.forecast.forecastday[0].day.maxtemp_f) + "°" + "F";
-  tempDiv.innerHTML = Math.round(data.current.temp_f) + "°" + "F";
+  tempDiv.innerHTML = Math.round(data.current.temp_f);
+  degree.innerHTML = "°F";
   minTempDiv.innerHTML =
     Math.round(data.forecast.forecastday[0].day.mintemp_f) + "°" + "F";
   conditionTextDiv.innerHTML = data.current.condition.text;
@@ -124,6 +126,8 @@ const updateWeatherTomorrow = (data) => {
   let timeNode = document.getElementById("currentTime");
   let dateDiv = document.getElementById("currentDate");
   let maxTempDiv = document.getElementById("currentMaxTemp");
+  let tempDiv = document.getElementById("currentTemp");
+  let degree = document.getElementById("tempF");
   let minTempDiv = document.getElementById("currentMinTemp");
   let imgDiv = document.getElementById("currentConditionImg");
   let conditionTextDiv = document.getElementById("currentConditionText");
@@ -164,6 +168,8 @@ const updateWeatherTomorrow = (data) => {
   dateDiv.innerHTML = tomorrowFormattedDate;
   maxTempDiv.innerHTML =
     Math.round(data.forecast.forecastday[0].day.maxtemp_f) + "°" + "F";
+  tempDiv.innerHTML = "";
+  degree.innerHTML = "";
   minTempDiv.innerHTML =
     Math.round(data.forecast.forecastday[0].day.mintemp_f) + "°" + "F";
   conditionTextDiv.innerHTML = data.forecast.forecastday[0].day.condition.text;

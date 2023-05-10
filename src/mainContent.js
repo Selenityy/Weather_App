@@ -1,5 +1,5 @@
 import { findWeather, updateWeatherToday } from "./APILogic";
-import { createImg, createNewDiv } from "./DOMlogic";
+import { addText, createImg, createNewDiv } from "./DOMlogic";
 import { forecastEndpoint, today } from ".";
 
 const WEATHER_ICONS = require.context(
@@ -23,6 +23,8 @@ const createMainContent = () => {
   createNewDiv("currentDate", "currentForecastTemp");
   createNewDiv("currentMaxTemp", "currentForecastTemp");
   createNewDiv("currentTemp", "currentForecastTemp");
+  createNewDiv("tempF", "currentForecastTemp");
+  addText("tempF", "°F");
   createNewDiv("currentMinTemp", "currentForecastTemp");
   createNewDiv("currentCondition", "currentForecastTemp");
   createImg("currentConditionImg", "currentCondition");
