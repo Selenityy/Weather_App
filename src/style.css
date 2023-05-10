@@ -9,10 +9,18 @@
 html,
 body {
   height: 100%;
-  padding: 20px;
-  background-image: url("./assets/background.png");
+  /* padding: 20px; */
+  /* background-image: url("./assets/background.png");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
+  /* background-color: #afdbf5; */
+  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(55, 89, 204);
+  background: linear-gradient(
+    180deg,
+    rgba(55, 89, 204, 1) 0%,
+    rgba(128, 218, 236, 1) 100%
+  );
 }
 
 #content {
@@ -21,53 +29,100 @@ body {
   gap: 100px;
 }
 
+#searchBar {
+  padding: 20px 20px 0px 20px;
+  border-bottom: 1px solid #2f4799;
+  box-shadow: 1px 1px 10px #2f4799;
+}
+
 #mainSection {
   display: flex;
   gap: 200px;
+  justify-content: space-around;
 }
 
 #searchLocation {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 10px; */
+  padding: 10px 25px 0px 25px;
 }
 
 #myForm {
   display: flex;
   align-items: center;
-  border-bottom: 2px solid black;
-  max-width: 200px;
-  height: 30px;
+  border: 1px solid rgb(55, 89, 204);
+  border-radius: 30px;
+  padding: 10px 15px 10px 15px;
+  width: 20%;
+  height: 40px;
+  /* max-width: 200px; */
+  /* height: 30px; */
+  background-color: white;
 }
 
 input#location {
   border: none;
-  width: 180px;
+  /* width: 180px; */
+  width: 100%;
   height: 100%;
   background-color: transparent;
   color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.95rem;
 }
 
 input::placeholder {
-  color: black;
+  color: grey;
+  font-weight: lighter;
 }
 
 #submitBtn {
   border: none;
   background-color: transparent;
+  padding-right: 15px;
 }
 
 #searchImg {
   display: block;
   max-width: 100%;
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
   object-fit: contain;
 }
 
 #toggleDay {
   display: flex;
   justify-content: space-around;
+  padding-top: 35px;
+  color: white;
+  font-size: 1.1rem;
+}
+
+button#today,
+button#tomorrow,
+button#threeDay {
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 1.1rem;
+  padding-bottom: 15px;
+}
+
+button#today:active,
+button#today:focus,
+button#today:target,
+button#tomorrow:active,
+button#tomorrow:focus,
+button#tomorrow:target,
+button#threeDay:active,
+button#threeDay:focus,
+button#threeDay:target {
+  border-bottom: 4px solid white;
+  padding-bottom: 10px;
 }
 
 #hourlyGraph {
@@ -133,10 +188,79 @@ input::placeholder {
 }
 
 .toggle input:checked + .slider {
-  background-color: #2196f3;
+  /* background-color: #2196f3; */
+  background-color: #ccc;
 }
 
 .toggle input:checked + .slider::before {
   content: "C";
   transform: translateX(calc(var(--width) - var(--height)));
+}
+
+#currentForecastTemp {
+  /* display: grid;
+  grid:
+    "location location" auto
+    "date time" auto
+    "maxdegree condition" auto
+    "degree condition" auto
+    "mindegree condition" auto
+    / 1fr 1fr;
+  gap: 8px 10px;
+
+  align-content: start;
+  justify-items: start; */
+  display: grid;
+  grid:
+    "location location location" auto
+    "date date time" auto
+    "maxtemp maxtemp condition" auto
+    "temp degree condition" auto
+    "mintemp mintemp condition" auto
+    / auto min-content auto;
+  gap: 8px 10px;
+  align-content: start;
+  justify-items: start;
+}
+
+#currentLocation {
+  grid-area: location;
+  padding-bottom: 10px;
+  font-size: 1rem;
+}
+
+#currentTime {
+  grid-area: time;
+  font-size: 1rem;
+}
+
+#currentDate {
+  grid-area: date;
+  font-size: 1rem;
+}
+
+#currentMaxTemp {
+  grid-area: maxtemp;
+  font-size: 1rem;
+}
+
+#currentTemp {
+  grid-area: temp;
+  font-size: 5rem;
+}
+
+#tempF {
+  grid-area: degree;
+  font-size: 1.5rem;
+  padding-top: 10px;
+}
+
+#currentMinTemp {
+  grid-area: mintemp;
+  font-size: 1rem;
+}
+
+#currentCondition {
+  grid-area: condition;
+  font-size: 1rem;
 }
