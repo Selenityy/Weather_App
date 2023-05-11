@@ -19,7 +19,7 @@ import {
 } from "./threeDayForecast";
 
 // Dates
-const baseUrl = "http://api.weatherapi.com/v1";
+const baseUrl = "https://api.weatherapi.com/v1";
 const forecastEndpoint = "	/forecast.json";
 
 let findToday = new Date();
