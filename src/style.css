@@ -139,8 +139,8 @@ button#threeDay:target {
 #rainIcon1,
 #rainIcon2,
 #rainIcon3 {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   object-fit: contain;
 }
 
@@ -273,4 +273,59 @@ img#currentConditionImg {
   flex-direction: column;
   gap: 15px;
   padding: 20px 0px 15px 0px;
+}
+
+#threeDayDates {
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+}
+
+#day1,
+#day2,
+#day3 {
+  display: grid;
+  grid:
+    "date" auto
+    "temp" auto
+    "weather" auto
+    "rain" auto
+    / auto;
+}
+
+#date1,
+#date2,
+#date3 {
+  grid-area: date;
+  padding-bottom: 10px;
+}
+
+#temp1,
+#temp2,
+#temp3 {
+  grid-area: temp;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  justify-content: center;
+}
+
+#weather1,
+#weather2,
+#weather3 {
+  grid-area: weather;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+
+#rainChance1,
+#rainChance2,
+#rainChance3 {
+  grid-area: rain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  font-size: 1.1rem;
 }
