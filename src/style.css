@@ -9,11 +9,6 @@
 html,
 body {
   height: 100%;
-  /* padding: 20px; */
-  /* background-image: url("./assets/background.png");
-  background-repeat: no-repeat;
-  background-size: cover; */
-  /* background-color: #afdbf5; */
   font-family: Arial, Helvetica, sans-serif;
   background: rgb(55, 89, 204);
   background: linear-gradient(
@@ -45,10 +40,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding-left: 25px;
-  padding-right: 25px;
-  padding-top: 10px; */
-  padding: 10px 25px 0px 25px;
+  padding: 10px 75px 0px 75px;
 }
 
 #myForm {
@@ -97,7 +89,7 @@ input::placeholder {
 #toggleDay {
   display: flex;
   justify-content: space-around;
-  padding-top: 35px;
+  padding-top: 50px;
   color: white;
   font-size: 1.1rem;
 }
@@ -198,29 +190,17 @@ button#threeDay:target {
 }
 
 #currentForecastTemp {
-  /* display: grid;
-  grid:
-    "location location" auto
-    "date time" auto
-    "maxdegree condition" auto
-    "degree condition" auto
-    "mindegree condition" auto
-    / 1fr 1fr;
-  gap: 8px 10px;
-
-  align-content: start;
-  justify-items: start; */
   display: grid;
   grid:
     "location location location" auto
     "date date time" auto
-    "maxtemp maxtemp condition" auto
+    "maxtemp . condition" auto
     "temp degree condition" auto
-    "mintemp mintemp condition" auto
+    "mintemp . condition" auto
     / auto min-content auto;
-  gap: 8px 10px;
-  align-content: start;
-  justify-items: start;
+  gap: 15px 10px;
+  /* align-content: start;
+  justify-items: start; */
 }
 
 #currentLocation {
@@ -242,6 +222,8 @@ button#threeDay:target {
 #currentMaxTemp {
   grid-area: maxtemp;
   font-size: 1rem;
+  display: flex;
+  justify-content: center;
 }
 
 #currentTemp {
@@ -258,9 +240,21 @@ button#threeDay:target {
 #currentMinTemp {
   grid-area: mintemp;
   font-size: 1rem;
+  display: flex;
+  justify-content: center;
 }
 
 #currentCondition {
   grid-area: condition;
   font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+img#currentConditionImg {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
 }
